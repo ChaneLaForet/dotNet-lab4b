@@ -10,6 +10,8 @@ using Lab2.Models;
 using Lab2.ViewModels;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lab2.Controllers
 {
@@ -122,6 +124,7 @@ namespace Lab2.Controllers
         /// <returns>NoContent if movie was added, BadRequest if the Id is not valid, or NotFound if movie was not found (based on Id).</returns>
         // PUT: api/Movies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(AuthenticationSchemes = "Identity.Application,Bearer")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMovie(int id, MovieViewModel movie)
         {
@@ -195,6 +198,7 @@ namespace Lab2.Controllers
         /// <returns>The movie that was created.</returns>
         // POST: api/Movies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(AuthenticationSchemes = "Identity.Application,Bearer")]
         [HttpPost]
         public async Task<ActionResult<Movie>> PostMovie(MovieViewModel movieRequest)
         {
@@ -211,6 +215,7 @@ namespace Lab2.Controllers
         /// <param name="id">The movie Id.</param>
         /// <returns>NoContent if the movie was deleted successfully, or NotFound otherwise.</returns>
         // DELETE: api/Movies/5
+        [Authorize(AuthenticationSchemes = "Identity.Application,Bearer")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
